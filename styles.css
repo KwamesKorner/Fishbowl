@@ -17,6 +17,13 @@ body {
     text-align: center;
     margin-top: 5rem;
   }
+
+  #tilt {
+    color: #fff;
+    font-size: 6rem;
+    text-align: center;
+    margin-top: 5rem;
+  }
   
   button {
     display: block;

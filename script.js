@@ -87,12 +87,33 @@ function next() {
 
 //add random functionality
 
-window.addEventListener("deviceorientation", handleOrientation, true);
-
 function handleOrientation(event) {
-  var tiltFB = event.beta; // beta is the tilt front-to-back
+    let x = event.beta; // In degree in the range [-180,180)
+    let y = event.gamma; // In degree in the range [-90,90)
+
+    document.querySelector("#tilt").innerHTML = x;
   
-  // Do something with the front-to-back tilt value, such as update the UI
-  console.log("Tilt FB: " + tiltFB);
-  document.querySelector("#tilt").innerHTML = tiltFB;
-}
+    // output.textContent = `beta : ${x}\n`;
+    // output.textContent += `gamma: ${y}\n`;
+  
+    // // Because we don't want to have the device upside down
+    // // We constrain the x value to the range [-90,90]
+    // if (x > 90) {
+    //   x = 90;
+    // }
+    // if (x < -90) {
+    //   x = -90;
+    // }
+  
+    // // To make computation easier we shift the range of
+    // // x and y to [0,180]
+    // x += 90;
+    // y += 90;
+  
+    // // 10 is half the size of the ball
+    // // It center the positioning point to the center of the ball
+    // ball.style.top = `${(maxY * y) / 180 - 10}px`;
+    // ball.style.left = `${(maxX * x) / 180 - 10}px`;
+  }
+  
+  window.addEventListener("deviceorientation", handleOrientation);
