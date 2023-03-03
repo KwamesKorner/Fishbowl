@@ -88,32 +88,26 @@ function next() {
 //add random functionality
 
 function handleOrientation(event) {
-    let x = event.beta; // In degree in the range [-180,180)
-    let y = event.gamma; // In degree in the range [-90,90)
+    const alpha = event.alpha;
+    const beta = event.beta;
+    const gamma = event.gamma;
+    document.querySelector("#tilt").innerHTML = gamma
+}
 
-    document.querySelector("#tilt").innerHTML = x;
-  
-    // output.textContent = `beta : ${x}\n`;
-    // output.textContent += `gamma: ${y}\n`;
-  
-    // // Because we don't want to have the device upside down
-    // // We constrain the x value to the range [-90,90]
-    // if (x > 90) {
-    //   x = 90;
-    // }
-    // if (x < -90) {
-    //   x = -90;
-    // }
-  
-    // // To make computation easier we shift the range of
-    // // x and y to [0,180]
-    // x += 90;
-    // y += 90;
-  
-    // // 10 is half the size of the ball
-    // // It center the positioning point to the center of the ball
-    // ball.style.top = `${(maxY * y) / 180 - 10}px`;
-    // ball.style.left = `${(maxX * x) / 180 - 10}px`;
-  }
-  
-  window.addEventListener("deviceorientation", handleOrientation);
+function onClick() {
+    if (typeof DeviceMotionEvent.requestPermission === 'function') {
+      // Handle iOS 13+ devices.
+      DeviceMotionEvent.requestPermission()
+        .then((state) => {
+          if (state === 'granted') {
+            window.addEventListener('devicemotion', handleOrientation);
+          } else {
+            console.error('Request to access the orientation was rejected');
+          }
+        })
+        .catch(console.error);
+    } else {
+      // Handle regular non iOS 13+ devices.
+      window.addEventListener('devicemotion', handleOrientation);
+    }
+}
