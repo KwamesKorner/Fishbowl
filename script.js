@@ -93,7 +93,7 @@ function handleOrientation(event) {
     const alpha = event.alpha;
     const beta = event.beta;
     const gamma = event.gamma;
-    document.querySelector("#tilt").innerHTML = event;
+    document.querySelector("#tilt").innerHTML = event.gamma;
 }
 
 function load() {
@@ -102,7 +102,7 @@ function load() {
       DeviceMotionEvent.requestPermission()
         .then((state) => {
           if (state === 'granted') {
-            window.addEventListener('devicemotion', handleOrientation);
+            window.addEventListener('deviceorientation', handleOrientation);
           } else {
             console.error('Request to access the orientation was rejected');
           }
