@@ -93,7 +93,9 @@ function handleOrientation(event) {
     const alpha = event.alpha;
     const beta = event.beta;
     const gamma = event.gamma;
-    document.querySelector("#tilt").innerHTML = alpha;
+    document.querySelector("#alpha").innerHTML = alpha;
+    document.querySelector("#beta").innerHTML = beta;
+    document.querySelector("#gamma").innerHTML = gamma;
 }
 
 function load() {
