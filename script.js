@@ -87,14 +87,16 @@ function next() {
 
 //add random functionality
 
+// window.addEventListener('deviceorientation', handleOrientation);
+
 function handleOrientation(event) {
     const alpha = event.alpha;
     const beta = event.beta;
     const gamma = event.gamma;
-    document.querySelector("#tilt").innerHTML = gamma
+    document.querySelector("#tilt").innerHTML = gamma;
 }
 
-function onClick() {
+function load() {
     if (typeof DeviceMotionEvent.requestPermission === 'function') {
       // Handle iOS 13+ devices.
       DeviceMotionEvent.requestPermission()
