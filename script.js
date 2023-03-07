@@ -131,10 +131,11 @@ characterOnScreen = document.querySelector("#character");
 
 const observer = new MutationObserver(() => {
     window.removeEventListener('devicemotion', handleOrientation);
+    window.removeEventListener('devicemotion', handleOrientation);
     console.log("listener removed!")
-    setTimeout(() => {
-        window.addEventListener('devicemotion', handleOrientation);
-    }, 1000);
+    // setTimeout(() => {
+    //     window.addEventListener('devicemotion', handleOrientation);
+    // }, 1000);
 });
 
 observer.observe(characterOnScreen, { subtree: true, childList: true });
