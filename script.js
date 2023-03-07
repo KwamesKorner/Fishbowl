@@ -129,6 +129,7 @@ function next() {
 
 function handleChange() {
     window.removeEventListener('devicemotion', handleOrientation);
+    document.getElementById("countdown").innerHTML = "Change!";
     setTimeout(() => {
         window.addEventListener('devicemotion', handleOrientation);
     }, 1000);
