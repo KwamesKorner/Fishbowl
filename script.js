@@ -143,11 +143,12 @@ function handleOrientation(event) {
     // document.querySelector("#gamma").innerHTML = gamma;
 
     if((30 <= gamma && gamma <= 60) || (-60 <= gamma && gamma <= -30)) {
-        next()
+        setTimeout(next(), 1500)
+
     }
 
-    if((10 <= gamma && gamma <= 40) || (-40 <= gamma && gamma <= -10)) {
-        next()
+    else if((10 <= gamma && gamma <= 40) || (-40 <= gamma && gamma <= -10)) {
+        setTimeout(next(), 1500)
     }
 }
 
