@@ -144,20 +144,11 @@ function handleOrientation(event) {
     // document.querySelector("#gamma").innerHTML = gamma;
 
     if((30 <= gamma && gamma <= 60) || (-60 <= gamma && gamma <= -30)) {
-        window.removeEventListener('devicemotion', handleOrientation);
         next()
-        setTimeout(() => {
-            window.addEventListener('devicemotion', handleOrientation);
-        }, 1000);
-
     }
 
     else if((10 <= gamma && gamma <= 40) || (-40 <= gamma && gamma <= -10)) {
-        window.removeEventListener('devicemotion', handleOrientation);
         next()
-        setTimeout(() => {
-            window.addEventListener('devicemotion', handleOrientation);
-        }, 1000);
     }
 }
 
@@ -177,4 +168,12 @@ function load() {
       // Handle regular non iOS 13+ devices.
       window.addEventListener('devicemotion', handleOrientation);
     }
+}
+
+function handleChange() {
+    window.removeEventListener('devicemotion', handleOrientation);
+    next()
+    setTimeout(() => {
+        window.addEventListener('devicemotion', handleOrientation);
+    }, 1000);
 }
