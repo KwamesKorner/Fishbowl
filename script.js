@@ -144,16 +144,20 @@ function handleOrientation(event) {
     // document.querySelector("#gamma").innerHTML = gamma;
 
     if((30 <= gamma && gamma <= 60) || (-60 <= gamma && gamma <= -30)) {
+        next()
+        window.removeEventListener('devicemotion', handleOrientation);
         setTimeout(() => {
-            next();
-        }, 1500);
+            window.addEventListener('devicemotion', handleOrientation);
+        }, 1000);
 
     }
 
     else if((10 <= gamma && gamma <= 40) || (-40 <= gamma && gamma <= -10)) {
+        next()
+        window.removeEventListener('devicemotion', handleOrientation);
         setTimeout(() => {
-            next();
-        }, 1500);
+            window.addEventListener('devicemotion', handleOrientation);
+        }, 1000);
     }
 }
 
