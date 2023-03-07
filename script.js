@@ -126,7 +126,7 @@ function handleOrientation(event) {
     const gamma = event.gamma;
     // document.querySelector("#alpha").innerHTML = alpha;
     // document.querySelector("#beta").innerHTML = beta;
-    // document.querySelector("#gamma").innerHTML = gamma;
+    document.querySelector("#gamma").innerHTML = gamma;
 
     if((30 <= gamma <= 60) || (-60 <= gamma <= -30)) {
         next()
