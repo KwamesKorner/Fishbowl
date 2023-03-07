@@ -127,14 +127,17 @@ function next() {
     }
 }
 
-function handleChange() {
+characterOnScreen = document.querySelector("#character");
+
+const observer = new MutationObserver(() => {
     window.removeEventListener('devicemotion', handleOrientation);
-    document.getElementById("countdown").innerHTML = "Change!";
+    console.log("listener removed!")
     setTimeout(() => {
         window.addEventListener('devicemotion', handleOrientation);
     }, 1000);
-}
+});
 
+observer.observe(characterOnScreen, { subtree: true, childList: true });
 
 //create isStarted variable equal to whether previousCharacters is empty
 
