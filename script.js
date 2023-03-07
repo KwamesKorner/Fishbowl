@@ -130,8 +130,8 @@ function next() {
 characterOnScreen = document.querySelector("#character");
 
 const observer = new MutationObserver(() => {
-    window.removeEventListener('devicemotion', handleOrientation);
-    window.removeEventListener('devicemotion', handleOrientation);
+    window.removeEventListener('deviceorientation', handleOrientation);
+    // window.removeEventListener('devicemotion', handleOrientation);
     console.log("listener removed!")
     // setTimeout(() => {
     //     window.addEventListener('devicemotion', handleOrientation);
