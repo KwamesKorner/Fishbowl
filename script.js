@@ -31,6 +31,22 @@ function begin() {
     var startButton = document.getElementById("start-button");
     startButton.classList.toggle("hide")
 
+    if (typeof DeviceMotionEvent.requestPermission === 'function') {
+        // Handle iOS 13+ devices.
+        DeviceMotionEvent.requestPermission()
+          .then((state) => {
+            if (state === 'granted') {
+              window.addEventListener('deviceorientation', handleOrientation);
+            } else {
+              console.error('Request to access the orientation was rejected');
+            }
+          })
+          .catch(console.error);
+    } else {
+    // Handle regular non iOS 13+ devices.
+    window.addEventListener('devicemotion', handleOrientation);
+    }
+
     // Set the initial countdown value
     var countDownValue = 3;
 
@@ -123,10 +139,10 @@ function next() {
 function handleOrientation(event) {
     // const alpha = event.alpha;
     // const beta = event.beta;
-    const gamma = event.gamma;
+    // const gamma = event.gamma;
     // document.querySelector("#alpha").innerHTML = alpha;
     // document.querySelector("#beta").innerHTML = beta;
-    document.querySelector("#gamma").innerHTML = gamma;
+    // document.querySelector("#gamma").innerHTML = gamma;
 
     if((30 <= gamma <= 60) || (-60 <= gamma <= -30)) {
         next()
