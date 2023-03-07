@@ -27,6 +27,9 @@ var characters = [
     "Judas"
 ];
 
+// Set the initial countdown value
+var countDownValue = 3;
+
 function begin() {
     var startButton = document.getElementById("start-button");
     startButton.classList.toggle("hide")
@@ -46,9 +49,6 @@ function begin() {
         // Handle regular non iOS 13+ devices.
         window.addEventListener('devicemotion', handleOrientation);
     }
-
-    // Set the initial countdown value
-    var countDownValue = 3;
 
     countdown = document.getElementById("countdown")
     countdown.classList.toggle("show")
@@ -132,10 +132,9 @@ characterOnScreen = document.querySelector("#character");
 const observer = new MutationObserver(() => {
     if(previousCharacters.length > 1) {
         window.removeEventListener('deviceorientation', handleOrientation);
-        console.log("listener removed!")
-        // setTimeout(() => {
-        //     window.addEventListener('deviceorientation', handleOrientation);
-        // }, 1000);
+        setTimeout(() => {
+            window.addEventListener('deviceorientation', handleOrientation);
+        }, 1000);
     }
 });
 
@@ -155,15 +154,16 @@ function handleOrientation(event) {
     // document.querySelector("#alpha").innerHTML = alpha;
     // document.querySelector("#beta").innerHTML = beta;
     // document.querySelector("#gamma").innerHTML = gamma;
+    if(countDownValue == 0) {
+        if((30 <= gamma && gamma <= 60) || (-60 <= gamma && gamma <= -30)) {
+            next()
+            return;
+        }
 
-    if((30 <= gamma && gamma <= 60) || (-60 <= gamma && gamma <= -30)) {
-        next()
-        return;
-    }
-
-    else if((10 <= gamma && gamma <= 40) || (-40 <= gamma && gamma <= -10)) {
-        next()
-        return;
+        else if((10 <= gamma && gamma <= 40) || (-40 <= gamma && gamma <= -10)) {
+            next()
+            return;
+        }
     }
 }
 
