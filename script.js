@@ -140,13 +140,13 @@ function handleOrientation(event) {
     const gamma = event.gamma;
     // document.querySelector("#alpha").innerHTML = alpha;
     // document.querySelector("#beta").innerHTML = beta;
-    document.querySelector("#gamma").innerHTML = gamma;
+    // document.querySelector("#gamma").innerHTML = gamma;
 
-    if((30 <= gamma <= 60) || (-60 <= gamma <= -30)) {
+    if((30 <= gamma && gamma <= 60) || (-60 <= gamma && gamma <= -30)) {
         next()
     }
 
-    if((10 <= gamma <= 40) || (-40 <= gamma <= -10)) {
+    if((10 <= gamma && gamma <= 40) || (-40 <= gamma && gamma <= -10)) {
         next()
     }
 }
