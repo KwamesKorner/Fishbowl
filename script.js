@@ -130,12 +130,13 @@ function next() {
 characterOnScreen = document.querySelector("#character");
 
 const observer = new MutationObserver(() => {
-    window.removeEventListener('deviceorientation', handleOrientation);
-    // window.removeEventListener('devicemotion', handleOrientation);
-    console.log("listener removed!")
-    // setTimeout(() => {
-    //     window.addEventListener('devicemotion', handleOrientation);
-    // }, 1000);
+    if(previousCharacters.length > 0) {
+        window.removeEventListener('deviceorientation', handleOrientation);
+        console.log("listener removed!")
+        // setTimeout(() => {
+        //     window.addEventListener('deviceorientation', handleOrientation);
+        // }, 1000);
+    }
 });
 
 observer.observe(characterOnScreen, { subtree: true, childList: true });
