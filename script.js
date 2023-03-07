@@ -172,7 +172,6 @@ function load() {
 
 function handleChange() {
     window.removeEventListener('devicemotion', handleOrientation);
-    next()
     setTimeout(() => {
         window.addEventListener('devicemotion', handleOrientation);
     }, 1000);
