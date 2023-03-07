@@ -51,8 +51,8 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 9999;
+    /* background-color: rgba(0, 0, 0, 0.5); */
+    /* z-index: 9999; */
   }
   
   #settings-popup h2 {
@@ -99,6 +99,22 @@ body {
   #settings-popup button:hover {
     transform: scale(1.1);
     box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.5);
+  }
+
+  #settings-popup.show {
+    display: block;
+  }
+
+  #start-button.hide {
+    display: none;
+  }
+
+  #countdown {
+    display: none;
+  }
+
+  #countdown.show {
+    display: block;
   }
   
   .icon-container {

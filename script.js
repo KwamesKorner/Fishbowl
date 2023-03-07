@@ -27,6 +27,37 @@ var characters = [
     "Judas"
 ];
 
+function begin() {
+    var startButton = document.getElementById("start-button");
+    startButton.classList.toggle("hide")
+
+    // Set the initial countdown value
+    var countDownValue = 3;
+
+    countdown = document.getElementById("countdown")
+    countdown.classList.toggle("show")
+
+    // Update the countdown every 1 second
+    var x = setInterval(function() {
+
+        // Decrement the countdown value
+        countDownValue--;
+
+        // Display the countdown timer on the screen
+        document.getElementById("countdown").innerHTML = countDownValue;
+
+        // If the countdown is finished, display a message
+        if (countDownValue == 0) {
+            clearInterval(x);
+            // document.getElementById("countdown").innerHTML = "GO!";
+            countdown.classList.toggle("show")
+            next()
+            load()
+        }
+    }, 1000);
+
+}
+
 function openSettings() {
   var popup = document.getElementById("settings-popup");
   popup.classList.toggle("show");
@@ -90,12 +121,20 @@ function next() {
 // window.addEventListener('deviceorientation', handleOrientation);
 
 function handleOrientation(event) {
-    const alpha = event.alpha;
-    const beta = event.beta;
+    // const alpha = event.alpha;
+    // const beta = event.beta;
     const gamma = event.gamma;
-    document.querySelector("#alpha").innerHTML = alpha;
-    document.querySelector("#beta").innerHTML = beta;
-    document.querySelector("#gamma").innerHTML = gamma;
+    // document.querySelector("#alpha").innerHTML = alpha;
+    // document.querySelector("#beta").innerHTML = beta;
+    // document.querySelector("#gamma").innerHTML = gamma;
+
+    if((30 <= gamma <= 60) || (-60 <= gamma <= -30)) {
+        next()
+    }
+
+    if((10 <= gamma <= 40) || (-40 <= gamma <= -10)) {
+        next()
+    }
 }
 
 function load() {
