@@ -29,6 +29,8 @@ var characters = [
 
 // Set the initial countdown value
 var countDownValue = 3;
+var timerValue = 30;
+var score = 0
 
 function begin() {
     var startButton = document.getElementById("start-button");
@@ -53,6 +55,8 @@ function begin() {
     countdown = document.getElementById("countdown")
     countdown.classList.toggle("show")
 
+    timesUp = document.getElementById("timesUp")
+
     // Update the countdown every 1 second
     var x = setInterval(function() {
 
@@ -65,9 +69,27 @@ function begin() {
         // If the countdown is finished, display a message
         if (countDownValue == 0) {
             clearInterval(x);
-            // document.getElementById("countdown").innerHTML = "GO!";
             countdown.classList.toggle("show")
+            document.getElementById("timer-container").classList.toggle("show")
+            document.getElementById("score-container").classList.toggle("show")
             next()
+        }
+    }, 1000);
+
+    var x = setInterval(function() {
+
+        // Decrement the countdown value
+        timerValue--;
+
+        // Display the countdown timer on the screen
+        document.getElementById("timer").innerHTML = timerValue;
+
+        // If the countdown is finished, display a message
+        if (timerValue == 0) {
+            window.removeEventListener('deviceorientation', handleOrientation);
+            clearInterval(x);
+            document.getElementById("character").innerHTML = ''
+            timesUp.classList.toggle("show")
         }
     }, 1000);
 
@@ -157,6 +179,8 @@ function handleOrientation(event) {
     if(countDownValue == 0) {
         if((30 <= gamma && gamma <= 60) || (-60 <= gamma && gamma <= -30)) {
             next()
+            score += 1
+            document.getElementById("score").innerHTML = score;
             return;
         }
 
