@@ -171,7 +171,7 @@ observer.observe(characterOnScreen, { subtree: true, childList: true });
 timeUp = document.querySelector("#timesUp");
 
 const timesUpObserver = new MutationObserver(() => {
-    if(previousCharacters.length == characters.length) {
+    if(previousCharacters.length > 0) {
         console.log("equal")
         window.removeEventListener('deviceorientation', handleOrientation);
     }
