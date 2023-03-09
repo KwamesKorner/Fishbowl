@@ -158,14 +158,14 @@ body {
   .icon-container {
     position: absolute;
     top: 1rem;
-    right: 1rem;
+    right: 3rem;
     cursor: pointer;
   }
   
   #timer-container {
     position: absolute;
     top: 0rem;
-    left: 1rem;
+    left: 3rem;
     display: none;
   }
 
@@ -176,7 +176,7 @@ body {
   #score-container {
     position: absolute;
     top: 5rem;
-    left: 1rem;
+    left: 3rem;
     display: none;
   }
 

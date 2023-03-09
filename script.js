@@ -91,6 +91,7 @@ function gameplay() {
         // If the countdown is finished, display a message
         if (timerValue == 0) {
             window.removeEventListener('deviceorientation', handleOrientation);
+            window.removeEventListener('deviceorientation', handleOrientation);
             clearInterval(y);
             document.getElementById("character").innerHTML = ''
             timesUp.classList.toggle("show")
@@ -104,9 +105,11 @@ function openSettings() {
   if(!startButton.classList.contains("hide")) {
     startButton.classList.toggle("hide")
     popup.classList.toggle("show");
+  } else if (previousCharacters.length > 0){
+    return;
   } else {
     popup.classList.remove("show");
-    startButton.classList.toggle("hide")
+    startButton.classList.toggle("hide");
   }
 }
 
