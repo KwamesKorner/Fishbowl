@@ -33,6 +33,7 @@ var timerValue = 30;
 var score = 0;
 let screenLock;
 var startButton = document.getElementById("start-button");
+timesUp = document.getElementById("timesUp")
 
 function begin() {
     startButton.classList.toggle("hide")
@@ -55,8 +56,6 @@ function begin() {
     getScreenLock()
     countdown = document.getElementById("countdown")
     countdown.classList.toggle("show")
-
-    timesUp = document.getElementById("timesUp")
 
     // Update the countdown every 1 second
     var x = setInterval(function() {
@@ -91,9 +90,9 @@ function gameplay() {
         // If the countdown is finished, display a message
         if (timerValue == 0) {
             window.removeEventListener('deviceorientation', handleOrientation);
-            window.removeEventListener('deviceorientation', handleOrientation);
             clearInterval(y);
             document.getElementById("character").innerHTML = ''
+            timesUp.innerHTML = "TIME'S UP!"
             timesUp.classList.toggle("show")
             release();
         }
@@ -172,7 +171,7 @@ observer.observe(characterOnScreen, { subtree: true, childList: true });
 timeUp = document.querySelector("#timesUp");
 
 const timesUpObserver = new MutationObserver(() => {
-    if(previousCharacters.length > 1) {
+    if(previousCharacters.length == characters.length) {
         window.removeEventListener('deviceorientation', handleOrientation);
     }
 });
