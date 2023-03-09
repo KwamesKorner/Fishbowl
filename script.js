@@ -172,6 +172,7 @@ timeUp = document.querySelector("#timesUp");
 
 const timesUpObserver = new MutationObserver(() => {
     if(previousCharacters.length == characters.length) {
+        console.log("equal")
         window.removeEventListener('deviceorientation', handleOrientation);
     }
 });
