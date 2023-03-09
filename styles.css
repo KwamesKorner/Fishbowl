@@ -52,7 +52,7 @@ body {
   
   #settings-popup {
     display: none;
-    position: fixed;
+    position: relative;
     top: 0;
     left: 0;
     right: 0;
@@ -66,7 +66,7 @@ body {
     font-size: 3rem;
     font-weight: bold;
     text-align: center;
-    margin-top: 10rem;
+    margin-top: 1rem;
   }
   
   #settings-popup p {
@@ -90,9 +90,9 @@ body {
   
   #settings-popup button {
     display: block;
-    margin: 3rem auto;
+    margin: 2rem auto;
     padding: 1rem 2rem;
-    font-size: 2rem;
+    font-size: 1rem;
     font-weight: bold;
     background-color: #fff;
     border: none;
@@ -120,8 +120,36 @@ body {
   }
 
   #timesUp {
+    animation:1s blinker linear infinite;
+    -webkit-animation:1s blinker linear infinite;
+    -moz-animation:1s blinker linear infinite;
     display: none;
   }
+
+  #timesUp.show {
+    display: block;
+  }
+
+   @-moz-keyframes blinker
+   {  
+        0% { opacity: 1.0; }
+        50% { opacity: 0.0; }
+        100% { opacity: 1.0; }
+    }
+
+    @-webkit-keyframes blinker
+    {  
+        0% { opacity: 1.0; }
+        50% { opacity: 0.0; }
+        100% { opacity: 1.0; }
+    }
+
+    @keyframes blinker
+    {  
+        0% { opacity: 1.0; }
+        50% { opacity: 0.0; }
+        100% { opacity: 1.0; }
+    }
 
   #countdown.show {
     display: block;
@@ -138,7 +166,7 @@ body {
     position: absolute;
     top: 0rem;
     left: 1rem;
-    /* display: none; */
+    display: none;
   }
 
   #timer-container.show {
@@ -149,7 +177,7 @@ body {
     position: absolute;
     top: 5rem;
     left: 1rem;
-    /* display: none; */
+    display: none;
   }
 
   #score-container.show {

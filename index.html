@@ -17,16 +17,17 @@
         <i class="fa-solid fa-gear fa-3x" onclick="openSettings()"></i>
     </div>
     <h1>Fishbowl</h1>
-    <div id="character"></div>
-    <h1 id="countdown">3</h1>
-    <h1 id="timesUp">TIME'S UP!</h1>
-    <button id="start-button" onclick="begin()">Start</button><br/><br/>
     <div id="settings-popup">
         <h2>Enter Characters/Figures</h2>
         <p>Separate each character/figure with a comma and no spaces.</p>
         <textarea id="characters-input" placeholder="Enter characters/figures"></textarea><br>
-        <button id="save-button" onclick="saveCharacters()">Save</button>
+        <button id="save-button" onclick="saveCharacters()">Save As New Items</button>
+        <button id="add-button" onclick="addCharacters()">Add Items</button>
     </div>
+    <div id="character"></div>
+    <h1 id="countdown">3</h1>
+    <h1 id="timesUp">TIME'S UP!</h1>
+    <button id="start-button" onclick="begin()">Start</button><br/><br/>
     <script src="script.js"></script>
   </body>
 </html>

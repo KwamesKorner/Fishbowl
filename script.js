@@ -30,10 +30,11 @@ var characters = [
 // Set the initial countdown value
 var countDownValue = 3;
 var timerValue = 30;
-var score = 0
+var score = 0;
+let screenLock;
+var startButton = document.getElementById("start-button");
 
 function begin() {
-    var startButton = document.getElementById("start-button");
     startButton.classList.toggle("hide")
 
     if (typeof DeviceMotionEvent.requestPermission === 'function') {
@@ -51,7 +52,7 @@ function begin() {
         // Handle regular non iOS 13+ devices.
         window.addEventListener('devicemotion', handleOrientation);
     }
-
+    getScreenLock()
     countdown = document.getElementById("countdown")
     countdown.classList.toggle("show")
 
@@ -72,11 +73,14 @@ function begin() {
             countdown.classList.toggle("show")
             document.getElementById("timer-container").classList.toggle("show")
             document.getElementById("score-container").classList.toggle("show")
+            gameplay()
             next()
         }
     }, 1000);
+}
 
-    var x = setInterval(function() {
+function gameplay() {
+    var y = setInterval(function() {
 
         // Decrement the countdown value
         timerValue--;
@@ -87,17 +91,23 @@ function begin() {
         // If the countdown is finished, display a message
         if (timerValue == 0) {
             window.removeEventListener('deviceorientation', handleOrientation);
-            clearInterval(x);
+            clearInterval(y);
             document.getElementById("character").innerHTML = ''
             timesUp.classList.toggle("show")
+            release();
         }
     }, 1000);
-
 }
 
 function openSettings() {
   var popup = document.getElementById("settings-popup");
-  popup.classList.toggle("show");
+  if(!startButton.classList.contains("hide")) {
+    startButton.classList.toggle("hide")
+    popup.classList.toggle("show");
+  } else {
+    popup.classList.remove("show");
+    startButton.classList.toggle("hide")
+  }
 }
 
 function saveCharacters() {
@@ -108,18 +118,19 @@ function saveCharacters() {
   });
   var popup = document.getElementById("settings-popup");
   popup.classList.remove("show");
+  startButton.classList.toggle("hide")
 }
 
-// function getRandomCharacter() {
-//   var index = Math.floor(Math.random() * characters.length);
-//   return characters[index];
-// }
-
-// function next() {
-//   var characterElement = document.getElementById("character");
-//   var character = getRandomCharacter();
-//   characterElement.textContent = character;
-// }
+function addCharacters() {
+    var input = document.getElementById("characters-input").value;
+    charactersToAdd = input.split(",");
+    characters.concat(charactersToAdd.map(function(c) {
+      return c.trim();
+    }));
+    var popup = document.getElementById("settings-popup");
+    popup.classList.remove("show");
+    startButton.classList.toggle("hide")
+}
 
 
   
@@ -134,13 +145,6 @@ function next() {
     if (!previousCharacters.includes(character)) {
         // Select a random character from the list
         document.querySelector("#character").innerHTML = character;
-        
-        // Check if the character has already been displayed
-        
-        // If it has, select another character
-
-        
-        // Add the character to the list of previous characters
         previousCharacters.push(character);
         
     } else {
@@ -161,13 +165,6 @@ const observer = new MutationObserver(() => {
 });
 
 observer.observe(characterOnScreen, { subtree: true, childList: true });
-
-//create isStarted variable equal to whether previousCharacters is empty
-
-
-//add random functionality
-
-// window.addEventListener('deviceorientation', handleOrientation);
 
 function handleOrientation(event) {
     // const alpha = event.alpha;
@@ -191,20 +188,27 @@ function handleOrientation(event) {
     }
 }
 
-// function load() {
-//     if (typeof DeviceMotionEvent.requestPermission === 'function') {
-//       // Handle iOS 13+ devices.
-//       DeviceMotionEvent.requestPermission()
-//         .then((state) => {
-//           if (state === 'granted') {
-//             window.addEventListener('deviceorientation', handleOrientation);
-//           } else {
-//             console.error('Request to access the orientation was rejected');
-//           }
-//         })
-//         .catch(console.error);
-//     } else {
-//       // Handle regular non iOS 13+ devices.
-//       window.addEventListener('devicemotion', handleOrientation);
-//     }
-// }
+function isScreenLockSupported() {
+    return ('wakeLock' in navigator);
+}
+
+async function getScreenLock() {
+    if(isScreenLockSupported()){
+      try {
+         screenLock = await navigator.wakeLock.request('screen');
+      } catch(err) {
+         console.log(err.name, err.message);
+      }
+      return screenLock;
+    }
+}
+
+function release() { 
+    if(typeof screenLock !== "undefined" && screenLock != null) {
+      screenLock.release()
+      .then(() => {
+        console.log("Lock released 🎈");
+        screenLock = null;
+      });
+    }
+}
