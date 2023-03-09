@@ -189,7 +189,7 @@ function handleOrientation(event) {
     // document.querySelector("#alpha").innerHTML = alpha;
     // document.querySelector("#beta").innerHTML = beta;
     // document.querySelector("#gamma").innerHTML = gamma;
-    if(countDownValue == 0) {
+    if(countDownValue == 0 && timerValue != 0) {
         if((30 <= gamma && gamma <= 60) || (10 <= gamma && gamma <= 40)) {
             next()
             score += 1
