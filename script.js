@@ -169,6 +169,16 @@ const observer = new MutationObserver(() => {
 
 observer.observe(characterOnScreen, { subtree: true, childList: true });
 
+timeUp = document.querySelector("#timesUp");
+
+const timesUpObserver = new MutationObserver(() => {
+    if(previousCharacters.length > 1) {
+        window.removeEventListener('deviceorientation', handleOrientation);
+    }
+});
+
+timesUpObserver.observe(timeUp, { subtree: true, childList: true });
+
 function handleOrientation(event) {
     // const alpha = event.alpha;
     // const beta = event.beta;
@@ -177,14 +187,14 @@ function handleOrientation(event) {
     // document.querySelector("#beta").innerHTML = beta;
     // document.querySelector("#gamma").innerHTML = gamma;
     if(countDownValue == 0) {
-        if((30 <= gamma && gamma <= 60) || (-60 <= gamma && gamma <= -30)) {
+        if((30 <= gamma && gamma <= 60) || (10 <= gamma && gamma <= 40)) {
             next()
             score += 1
             document.getElementById("score").innerHTML = score;
             return;
         }
 
-        else if((10 <= gamma && gamma <= 40) || (-40 <= gamma && gamma <= -10)) {
+        else if((-60 <= gamma && gamma <= -30) || (-40 <= gamma && gamma <= -10)) {
             next()
             return;
         }
