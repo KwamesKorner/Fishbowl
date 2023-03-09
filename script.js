@@ -142,16 +142,18 @@ var previousCharacters = [];
 
 // Define the next() function to randomly select a character and display it
 function next() {
-    var index = Math.floor(Math.random() * characters.length);
-    var character = characters[index];
-    if (!previousCharacters.includes(character)) {
-        // Select a random character from the list
-        document.querySelector("#character").innerHTML = character;
-        previousCharacters.push(character);
-        
-    } else {
-        next();
-        return;
+    if (characters.length > 0) {
+        var index = Math.floor(Math.random() * characters.length);
+        var character = characters[index];
+        if (!previousCharacters.includes(character)) {
+            // Select a random character from the list
+            document.querySelector("#character").innerHTML = character;
+            previousCharacters.push(character);
+            
+        } else {
+            next();
+            return;
+        }
     }
 }
 
